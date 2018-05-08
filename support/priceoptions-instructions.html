@@ -1,0 +1,63 @@
+Instructions for Price Options:
+
+1) Copy the code example into a new web page e.g. mals.html
+2) Download and save the mals-scripts.js file into the same folder (note: can be in another)
+3) Change the product information in the form to your product
+    e.g. <input type="hidden" name="product" value="Curtains" />
+4) Change the base price value
+    e.g. <input type="hidden" name="price" value="20" />
+5) Create your product options
+
+    <select name="product[]">
+        <option value="Small:0">Small</option>
+        <option value="Medium:5.00">Medium (+$5)</option>
+        <option value="Large:7.00">Large (+$7)</option>
+    </select>
+
+    Just like productpr the option values are divided into
+
+    product:price
+
+    TIP!
+    - Include the product name in both value and text of option to make it clear to customer in cart too
+6) Add the total display. Give it an id of malsRunningTotal
+
+    Total: $<span id="malsRunningTotal">0.00</span>
+
+6) Ensure your wwX and userid are the same as Mals (TIP! enter your details at the top before copying example)
+7) Open the web page in a browser e.g. Chrome and test it
+
+--- Calling Script ---
+The script is very versatile. You can activate it on one or more forms (or links) easily. Note: if you don't know jQuery selectors visit https://www.w3schools.com/jquery/jquery_selectors.asp
+
+- Example 1 = specific form by id
+MalsScripts.priceOptions('#form1');
+
+This will activate the script on the form with id="form1"
+    
+- Example 2 = cart delimiter. The script uses {br} as the cart delimiter which spaces the product in the cart. You can change this to whatever you wish
+MalsScripts.priceOptions('#form1',',');
+    
+- Example 3 = submit callback function
+MalsScripts.priceOptions('#form1','{br}',function(){
+    // Called when form is submitted
+    
+});
+
+- Example 4 = running total update callback
+priceOptions(element,,function(){
+    // Called when running total display is updated
+    
+})
+
+- Example 5 = callback called when input element is clicked/updated
+priceOptions(element,{br},,,function(){
+    // Called when input element is changed
+    
+})
+
+--- General Notes ---
+- Add class .mals-ignore to any forms you don't want transformed e.g. <form action="http://wwX.aitsafe.com/cf/add.cfm" class="mals-ignore">...
+- You can select multiple forms by using a comma e.g. MalsScripts.priceOptions('#form1,#form2');
+- jQuery selectors work here
+- callback functions = create a function e.g. callbackpriceOptions which will be called when the form is transformed

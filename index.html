@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="utf-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>LH Software - Custom Scripts for Mals Ecommerce and Your Website</title>
+        <!-- jQuery -->
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <!-- Bootstrap -->
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+        <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+        <link rel="stylesheet" href="res/bootstrap.min.css">
+        <script src="js/bootstrap-3.3.7.min.js"></script>
+        <!-- Mals Scripts -->
+        <script src="js/mals-scripts.js"></script>
+        <!-- Site -->
+        <script src="js/site.js"></script>
+        <link rel="stylesheet" href="res/site.css">
+        <style type="text/css">
+        </style>
+        <script>            
+            $(document).ready(function(){            
+                // Show MalsScripts Version
+                let malsScripts = new MalsScripts();
+                let scriptVersion = $('#MalsScriptsVersion').html();
+                scriptVersion = scriptVersion.replace('{version}',malsScripts.version.toFixed(2).toString());
+                $('#MalsScriptsVersion').html(scriptVersion);
+                
+                // Set up carousel
+                let carousel = createCarousel(new MalsScripts().scripts,'carousel','200px',{text:"free mals-e.com scripts",color:"yellow"});
+                $('#scriptsCarousel').html(carousel);
+                
+            });
+        </script>
+    </head>
+    <body>
+        <header></header>
+        <div id="scriptsCarousel" style="margin-bottom: 15px;"></div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div id="MalsScriptsVersion" style="padding: 4px; font-style: italic; border: 1px dashed black;">MalsScripts.js Current Version: {version} <a href="mals.html">See examples and download here</a></div>
+                </div>
+                <div class="col-sm-4">
+                    <p>some text here</p>
+                </div>
+                <div class="col-sm-4">
+                    <p>and text here</p>
+                </div>
+            </div>
+        </div>
+        <div style="height: 1000px"></div>
+        <footer></footer>
+    </body>
+</html>

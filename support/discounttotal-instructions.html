@@ -1,0 +1,61 @@
+Instructions for Discount Total:
+
+1) Copy the code example into a new web page e.g. mals.html
+2) Download and save the mals-scripts.js file into the same folder (note: can be in another)
+3) Change the product information in the form to your product
+    e.g. <input type="hidden" name="product" value="Curtains" />
+4) Change the discountpr value to your product discount
+    e.g. <input type="hidden" name="discountpr" value="2,9.99:2,8.99:4,7.99:0,6.99" />
+
+    The above example means:
+
+    if they order 2 or less the price is 9.99
+    if they order 3 to 4 (i.e. 2 + 2 = 4), the price is 8.99
+    if they order 5 to 8 (i.e. 4 + 4 = 8), the price is 7.99
+    if they order more than 8 (ignore the 0) the price is 6.99
+
+    For more info on discountpr visit https://www.mals-e.com/tpv.php?tp=2
+
+5) Ensure your wwX and userid are the same as Mals (TIP! enter your details at the top before copying example)
+6) Open the web page in a browser e.g. Chrome and test it
+
+--- Customize ---
+The script looks for an element with id called malsDiscountTotal to display the total. Put this wherever you like within the form and style using CSS.
+
+<div>Total: $<span id="malsDiscountTotal">0.00</span></div>
+
+--- Calling Script ---
+The script is very versatile. You can activate it on one or more forms (or links) easily. Note: if you don't know jQuery selectors visit https://www.w3schools.com/jquery/jquery_selectors.asp
+
+- Example 1 = specific form by id
+MalsScripts.discountTotal('#form1');
+
+This will activate the script on the form with id="form1"
+    
+- Example 2 = specific forms by id
+MalsScripts.discountTotal('#form1,#form2');
+
+This will activate the script on two forms with id="form1" and id="form2"
+    
+- Example 3 = all forms by class
+MalsScripts.discountTotal('.myform');
+
+This will activate the script on all forms with class="myform"
+    
+- Example 4 = callback function
+MalsScripts.discountTotal('#form1',function(){
+    // Called when script is called;
+    
+});
+
+- Example 5 = callback click function
+discountTotal(element,,function(){
+    // Called when qty field changed/clicked
+    
+})
+
+--- General Notes ---
+- Add class .mals-ignore to any forms you don't want transformed e.g. <form action="http://wwX.aitsafe.com/cf/add.cfm" class="mals-ignore">...
+- You can select multiple forms by using a comma e.g. MalsScripts.discountTotal('#form1,#form2');
+- jQuery selectors work here
+- callback functions = create a function e.g. callbackdiscountTotal which will be called when the form is transformed

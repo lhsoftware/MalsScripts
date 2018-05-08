@@ -1,0 +1,20 @@
+<div class="example-activate"><button onclick="$('#runningTotalDisplay').show();MalsScripts.runningTotal('#formRunningTotal');">Activate</button></div>
+<form id="formRunningTotal" method="POST" action="http://ww9.aitsafe.com/cf/addmulti.cfm">
+    <h4>Computer Games</h4>
+    <input type="hidden" name="userid" value="B4195535" /> Tomb Raider $29.95
+    
+    <input name="qty1" type="text" placeholder="Enter Quantity" />
+    <input type="hidden" name="product1" value="Tomb Raider" />
+    <input type="hidden" name="price1" value="29.95" /> Street Fighter $39.95
+    
+    <select name="qty2"></select>
+    <input type="hidden" name="product2" value="Street Fighter" />
+    <input type="hidden" name="price2" value="39.95" />  Zelda $14.95
+    
+    <select name="qty3"></select>
+    <input type="hidden" name="product3" value="Zelda" />
+    <input type="hidden" name="price3" value="14.95" />
+
+    <div id="runningTotalDisplay" style="display: none;" class="mals-running-total">Total: $<span id="malsRunningTotal">0.00</span></div>
+    <div><button type="submit" class="btn btn-primary">Buy Game(s)</button></div>
+</form>

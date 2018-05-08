@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="utf-8"> 
+        <title>Example</title>
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Mals Scripts -->
+        <script src="mals-scripts.js"></script>
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+        <script>
+            $(document).ready(function(){
+                MalsScripts.restrictQty('#form1');
+            });
+        </script>
+    </head>
+    <body>
+        <form action="http://ww9.aitsafe.com/cf/add.cfm" method="post" id="form1">
+            <h1>Radios</h1>
+            <input name="userid" type="hidden" value="B4195535" />
+            <select name="productpr" mals-qty="1..3,4..6,7+">
+                <option value="Small:10">Small $10</option>
+                <option value="Medium:11" selected>Medium $11</option>
+                <option value="Large:12">Large $12</option>
+            </select>
+            Quantity: 
+            <select name="qty">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+            <button type="submit">Buy</button>
+        </form>
+    </body>
+</html>

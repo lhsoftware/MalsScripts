@@ -1,0 +1,47 @@
+Instructions for Minimum Order:
+
+1) Copy the code example into a new web page e.g. mals.html
+2) Download and save the mals-scripts.js file into the same folder (note: can be in another)
+3) Change the product information in the form to your product
+    e.g. <input type="hidden" name="product" value="Pens" />
+4) Change the price value
+    e.g. <input type="hidden" name="price" value="3.00" />
+
+5) In the calling function add the minimum price
+
+    MalsScripts.minOrderTotal('#form1',10);
+
+    Change 10 to your minimum price
+
+6) By default the script uses Bootstrap (https://getbootstrap.com/) to create a notification. Ensure you add stylesheet and javascript links to bootstrap if desired or use your own function (see below)
+7) Ensure your wwX and userid are the same as Mals (TIP! enter your details at the top before copying example)
+8) Open the web page in a browser e.g. Chrome and test it
+
+--- Calling Script ---
+The script is very versatile. You can activate it on one or more forms (or links) easily. Note: if you don't know jQuery selectors visit https://www.w3schools.com/jquery/jquery_selectors.asp
+
+- Example 1 = specific form by id
+MalsScripts.minOrderTotal('#form1',10);
+
+This will activate the script on the form with id="form1" and give a minimum price of 10
+
+minOrderTotal(element,min,callbackError,callback)
+    
+    
+- Example 2 = callback function
+MalsScripts.minOrderTotal('#form1',10, function(min,total,element,e){
+    // Called when minimum value is not met
+    // Returns min = minimum value, total = current total value, element = qty element object, e = event object
+});
+
+- Example 3 = callback form submit function
+minOrderTotal(element,,function(){
+    // Called when qty field changed/clicked
+    
+})
+
+--- General Notes ---
+- Add class .mals-ignore to any forms you don't want transformed e.g. <form action="http://wwX.aitsafe.com/cf/add.cfm" class="mals-ignore">...
+- You can select multiple forms by using a comma e.g. MalsScripts.minOrderTotal('#form1,#form2');
+- jQuery selectors work here
+- callback functions = create a function e.g. callbackMinOrderTotal which will be called when the form is transformed

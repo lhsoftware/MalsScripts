@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="utf-8"> 
+        <title>Example</title>
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Mals Scripts -->
+        <script src="mals-scripts.js"></script>
+        <script>
+            $(document).ready(function(){
+                MalsScripts.runningTotal('#form1');
+            });
+        </script>
+    </head>
+    <body>
+        <form action="http://ww9.aitsafe.com/cf/addmulti.cfm" method="post" id="form1">
+            <h1>Old Computer Games</h1>
+            <input name="userid" type="hidden" value="B4195535" />
+            <div>
+                <input name="qty1" type="text" placeholder="Enter Quantity" />
+                <input type="hidden" name="product1" value="Tomb Raider" />
+                <input type="hidden" name="price1" value="29.95" /> Tomb Raider $29.95
+            </div>
+            <div>
+                <select name="qty2">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <input type="hidden" name="product2" value="Zelda" />
+                <input type="hidden" name="price2" value="39.95" />  Zelda $14.95
+            </div>
+            <div>Total: $<span id="malsRunningTotal">0.00</span></div>
+            <button type="submit">Buy</button>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,12 @@
+<div class="example-activate"><button onclick="MalsScripts.countCharacters('#formCountCharacters');">Activate</button></div>
+<form id="formCountCharacters" method="POST" action="http://ww9.aitsafe.com/cf/add.cfm">
+    <h4>Customise Necklace</h4>
+    <p>Create your own necklace. Maximum 20 characters</p>
+    <input type="hidden" name="userid" value="B4195535" />
+    <input type="hidden" name="price" value="20" />
+    <input type="hidden" name="product[]" value="Custom Necklace" />
+    <input type="text" name="product[]" maxlength="20" placeholder="Line 1: Add your necklace text here" />
+    <input type="text" name="product[]" maxlength="20" placeholder="Line 2: Add your necklace text here" />
+    Quantity: <select name="qty"></select> 
+    <div><button type="submit" class="btn btn-primary">Add to Cart</button></div>
+</form>

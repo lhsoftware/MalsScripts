@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="utf-8"> 
+        <title>Example</title>
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Mals Scripts -->
+        <script src="mals-scripts.js"></script>
+        <script>
+            $(document).ready(function(){
+                MalsScripts.priceOptions('#form1');
+            });
+        </script>
+    </head>
+    <body>
+        <form action="http://ww9.aitsafe.com/cf/add.cfm" method="post" id="form1">
+            <h1>Teddy Bear</h1>
+            <input name="userid" type="hidden" value="B4195535" />
+            <input name="product" type="hidden" value="Discount Jacket" />
+            <input type="hidden" name="price" value="10.00" />
+            <h5>Price: $10.00</h5>
+            Size:
+            <select name="product[]">
+                <option value="Small:0">Small</option>
+                <option value="Medium:5.00">Medium (+$5)</option>
+                <option value="Large:7.00">Large (+$7)</option>
+            </select>
+            Gift Wrapped?:
+            <select name="product[]">
+                <option value="">No</option>
+                <option value="Gift Wrapped:5">Yes ($5)</option>
+            </select>
+            Quantity: 
+            <select name="qty">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>            
+            <div>Total: $<span id="malsRunningTotal">0.00</span></div>
+            <button type="submit">Buy</button>
+        </form>
+    </body>
+</html>

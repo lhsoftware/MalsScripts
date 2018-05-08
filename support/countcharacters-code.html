@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="utf-8"> 
+        <title>Example</title>
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Mals Scripts -->
+        <script src="mals-scripts.js"></script>
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                MalsScripts.countCharacters('#form1');
+            });
+        </script>
+    </head>
+    <body>
+        <form action="http://ww9.aitsafe.com/cf/add.cfm" method="post" id="form1">
+            <p>Customise your bracelet</p>
+            <input name="userid" type="hidden" value="B4195535" />
+            <input type="hidden" name="price" value="10.00" />
+            <input type="hidden" name="product[]" value="Custom Necklace" />
+            <input type="text" name="product[]" maxlength="20" placeholder="Add your bracelet text here" />
+            Quantity: 
+            <select name="qty">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <button type="submit">Buy</button>
+        </form>
+    </body>
+</html>

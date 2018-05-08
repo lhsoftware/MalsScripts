@@ -1,0 +1,124 @@
+Instructions for Image Options:
+
+1) Copy the code example into a new web page e.g. mals.html
+2) Download and save the mals-scripts.js file into the same folder (note: can be in another)
+3) Change the base product information in the form to your product
+    e.g. <input type="hidden" name="product[]" value="Christmas Card" />
+4) Change the base price
+    e.g. <input type="hidden" name="price" value="2.00" />
+5) Image placeholders
+
+    i) You can place your image placeholders anywhere within the <form></form>
+    ii) Ensure the image is surrounded by a div with an id to reference it by e.g. malsImageDisplay1
+    iii) Ensure a class called mals-image is added to the image tag
+    iv) Images can be jpeg, png, gif or whatever. However, png is good for transparent backgrounds
+
+    e.g. <div id="malsImageDisplay1"><img src="card-white.png" class="mals-image" /></div>
+
+6) Build you product options
+
+    i) Each product option should have the name product[]
+    ii) Each option can change an image or do nothing but alter the price
+    iii) Use the MalsScripts.priceOptions() method to create the price. Read the instructions of Price Options for more details
+
+7) Change image
+
+    To change one or more images add the mals-img attribute to the option. For example
+
+    <select name="product[]">
+        <option value="Red" mals-img="{'src':'card-red.png','target':'#malsImageDisplay1'}">Red</option>
+    </select>
+
+    Let's break down the mals-img information
+
+    mals-img="{'src':'card-red.png','target':'#malsImageDisplay'}"
+
+    src = path/uri of image e.g. card-red.png
+    target = id of image you want to change e.g. #malsImageDisplay1 (Note: use jQuery selector i.e. #ImageName)
+
+    TIP!
+    - Don't use spaces or strange characters in your image names
+    - All lower case
+    - Use a hypen (-) to separate image parts e.g. product-size-color.png
+    - Use CSS to position images exactly where you want e.g. beside <select> options
+
+> Multiple Images: for example
+
+    mals-img="{'src':'card-front-red.png,card-back-red.png','target':'#malsImageDisplay1,#malsImageDisplay2'}"
+
+    src = first-image,second-image,third-image (Note: separate with a comma ,)
+    target = #id1,#id2,#id3 (Note: separate with a comma ,)
+
+    IMPORTANT! The number of src images must be the same as targets
+
+> Overlay/Layers: Add an image on top of the other images. For example
+
+    mals-img="{'src':'star.png','target':'#malsImageDisplay','overlay':'true'}"
+
+    overlay = true
+
+    TIP!
+    - Ensure your images are in .png format with transparent background
+    - Images will overlap others in order so the first <select> will overlap 1st then the next will overlap that
+    - Position and scale the overlay images using the details below
+    
+> Position: place the overlay exactly where you want. For example
+
+    mals-img="{'src':'star.png','target':'#malsImageDisplay','overlay':'true','left':'39%','top':'15%'}"
+    
+    overlay = true
+    left = xx
+    top = yy
+    
+    TIP!
+    - You can use %,px(pixels) or other values to position image
+    - Play around with the values to position exactly
+    - Combine with scale (see below) to reduce size of image
+        
+> Scale: Reduce/Increase the size of the overlay image. For example
+    
+    mals-img="{'src':'star.png','target':'#malsImageDisplay','overlay':'true','scale':'40%'}"
+
+    scale = xx%
+
+Notes:
+i) Written in json format which is quite strict and the format 'name':'value'
+ii) " and ' count. Use the format in the example above
+iii) must be surrounded by {...}
+
+8) Price Options script
+    Call the MalsScripts.priceOptions() to create a total
+        
+    The script looks for an element with id called malsRunningTotal to display the total (if selected). Put this wherever you like within the form and style using CSS.
+
+    <div>Total: $<span id="malsRunningTotal">0.00</span></div>
+        
+9) Ensure your wwX and userid are the same as Mals (TIP! enter your details at the top before copying example)
+10) Open the web page in a browser e.g. Chrome and test it
+
+
+--- Calling Script ---
+The script is very versatile. You can activate it on one or more forms (or links) easily. Note: if you don't know jQuery selectors visit https://www.w3schools.com/jquery/jquery_selectors.asp
+
+- Example 1 = specific form by id
+MalsScripts.imageOptions('#form1');
+
+This will activate the script on the form with id="form1"
+    
+- Example 2 = callback function
+MalsScripts.imageOptions('#form1',function(){
+    // Called when script is called;
+    
+});
+
+- Example 3 = callback click function
+imageOptions('#form1',,function(){
+    // Called when option changed
+    
+})
+
+--- General Notes ---
+- Add class .mals-ignore to any forms you don't want transformed e.g. <form action="http://wwX.aitsafe.com/cf/add.cfm" class="mals-ignore">...
+- You can select multiple forms by using a comma e.g. MalsScripts.imageOptions('#form1,#form2');
+- jQuery selectors work here
+- callback functions = create a function e.g. callbackimageOptions which will be called when the form is transformed

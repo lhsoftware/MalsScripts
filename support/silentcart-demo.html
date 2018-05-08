@@ -1,0 +1,46 @@
+<div class="example-activate"><button onclick="MalsScripts.silentCart('#formSilentCart,#aSilentCart,#formSilentCart2');">Activate</button></div>
+<form action="http://ww9.aitsafe.com/cf/add.cfm" method="post" id="formSilentCart">
+    <input name="userid" type="hidden" value="B4195535" />
+    <input name="product" type="hidden" value="Television" />
+    <input name="price" type="hidden" value="399" />
+    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Buy Television $399</button>
+</form>
+<div style="margin-top: 15px; margin-bottom: 15px;">
+    <a id="aSilentCart" href="http://ww9.aitsafe.com/cf/add.cfm?userid=B4195535&product=Lamp&price=19.99">Buy Lamp $19.99</a>
+</div>
+<form action="http://ww9.aitsafe.com/cf/add.cfm" method="post" id="formSilentCart2">
+    <input name="userid" type="hidden" value="B4195535" />
+    <input name="price" type="hidden" value="3.30" />
+    <INPUT TYPE="text" NAME="product[]" VALUE="Bin Liner" />
+    <input TYPE="text" NAME="product[]" VALUE="Yellow" />
+    <button type="submit" class="btn btn-primary">Add To Cart</button>
+</form>
+
+<style>
+    .modal-header, .modal-header h4, .modal-header .close {
+        background-color: #5cb85c;
+        color:white !important;
+    }
+    .modal-footer {
+        background-color: #f9f9f9;
+    }
+</style>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade mals-modal-addcart" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">ADDED TO CART</h4>
+      </div>
+      <div class="modal-body">
+        <p class="example" style="border: 0;"><a href="http://ww9.aitsafe.com/cf/review.cfm?userid=B4195535">View your cart here</a> or <a data-dismiss="modal" href="#">Continue shopping</a></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

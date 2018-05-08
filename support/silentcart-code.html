@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="utf-8"> 
+        <title>Example</title>
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Mals Scripts -->
+        <script src="../js/mals-scripts.js"></script>
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                MalsScripts.silentCart('#form1');
+            });
+        </script>
+    </head>
+    <body>
+        <form action="http://ww9.aitsafe.com/cf/add.cfm" method="post" id="form1">
+            <input name="userid" type="hidden" value="B4195535" />
+            <input name="product" type="hidden" value="Television" />
+            <input name="price" type="hidden" value="399" />
+            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Buy Television $399</button>
+        </form>
+        
+        <!-- Modal start -->
+        <div id="myModal" class="modal fade mals-modal-addcart" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">ADDED TO CART</h4>
+              </div>
+              <div class="modal-body">
+                <a href="http://ww9.aitsafe.com/cf/review.cfm?userid=B4195535">View your cart here</a> or <a data-dismiss="modal" href="#">Continue shopping</a>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal end -->
+    </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="utf-8"> 
+        <title>Example</title>
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Mals Scripts -->
+        <script src="mals-scripts.js"></script>
+        <script>
+            $(document).ready(function(){
+                MalsScripts.discountTotal('#form1');
+            });
+        </script>
+    </head>
+    <body>
+        <form action="http://ww9.aitsafe.com/cf/add.cfm" method="post" id="form1">
+            <p>Choose a quantity and save!</p>
+            <p>x1-2 = $9.99, x3-4 = $8.99, x5-8 = $7.99, x9+ = $6.99</p>
+            <input name="userid" type="hidden" value="B4195535" />
+            <input name="product" type="hidden" value="Discount Jacket" />
+            <input type="hidden" name="discountpr" value="2,9.99:2,8.99:4,7.99:0,6.99" />
+            Quantity: 
+            <select name="qty">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+            <div>Total: $<span id="malsDiscountTotal">0.00</span></div>
+            <button type="submit">Buy</button>
+        </form>
+    </body>
+</html>

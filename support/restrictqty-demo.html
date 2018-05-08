@@ -1,0 +1,24 @@
+<div class="example-activate"><button onclick="MalsScripts.restrictQty('#formRestrictQuantity1,#formRestrictQuantity2');">Activate</button></div>
+<form id="formRestrictQuantity1" action="http://ww9.aitsafe.com/cf/add.cfm" method="post">
+    <h4>Buy Super Widget</h4>
+    <input type="hidden" name="userid" value="B4195535">
+    <input type="text" name="qty" placeholder="Enter Quantity" />
+    <select name="productpr" mals-qty="1..3,4..6,7+">
+        <option value="Super Small Widget:10">Small $10</option>
+        <option value="Super Medium Widget:11">Medium $11</option>
+        <option value="Super Large Widget:12">Large $12</option>
+    </select>
+    <input type="Submit" class="btn btn-primary" value="Add to Cart">
+</form>
+<form id="formRestrictQuantity2" action="http://ww9.aitsafe.com/cf/add.cfm" method="post">
+    <h4>Buy Cool Widget</h4>
+    <input type="hidden" name="userid" value="B4195535">
+    <select name="qty"></select>
+    <select name="productpr" mals-qty="1..2,3..4,5..7,8+">
+        <option value="Cool Small Widget:10">Small $10</option>
+        <option value="Cool Medium Widget:11" selected>Medium $11</option>
+        <option value="Cool Large Widget:12">Large $12</option>
+        <option value="Cool Xtra Large Widget:13">Xtra Large $13</option>
+    </select>
+    <input type="Submit" class="btn btn-primary" value="Add to Cart">
+</form>

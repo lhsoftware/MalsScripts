@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="utf-8"> 
+        <title>Example</title>
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Mals Scripts -->
+        <script src="mals-scripts.js"></script>
+        <script>
+            $(document).ready(function(){
+                MalsScripts.generateOptions('#form1',true);
+            });
+        </script>
+    </head>
+    <body>
+        <form method="POST" action="http://ww9.aitsafe.com/cf/add.cfm" id="form1">
+            <h1>Bespoke PC - Brand X</h1>
+            <input type="hidden" name="userid" VALUE="B4195535" />
+            <input type="hidden" name="product[]" value="Bespoke PC Brand X" />
+            <input type="hidden" name="price" value="140.00" />
+            <h2>Base Price: $140.00</h2>
+            
+            <h3>Processor:</h3>
+            <div id="Processor">
+                <select id="OptionProcessor" name="product[]" required>
+                    <option value="">Select Processor Type</option>
+                    <option value="Processor - Intel" mals-generate="#ProcessorIntel">Intel</option>
+                    <option value="Processor - AMD" mals-generate="#ProcessorAMD">AMD</option>
+                </select>
+            </div>
+
+            <div id="ProcessorIntel" class="mals-sub">
+                <h6>Intel Processors:</h6>
+                <select id="OptionProcessorIntel" name="product[]">
+                    <option value="Pentium:10">Pentium (+$10.00)</option>
+                    <option value="Duo:20">Duo (+$20.00)</option>
+                    <option value="Core" mals-generate="#ProcessorIntelCore">Core (i3,i5,i7)</option>
+                </select>
+            </div>
+
+            <div id="ProcessorIntelCore" class="mals-sub">
+                <h6>Intel Core Processors:</h6>
+                <select id="OptionProcessorIntelCore" name="product[]">
+                    <option value="i3:40">Intel Core i3 (+$40.00)</option>
+                    <option value="i5:70">Intel Core i5 (+$70.00)</option>
+                    <option value="i7:100">Intel Core i7 (+$100.00)</option>
+                </select>
+            </div>
+            
+            <div id="ProcessorAMD" class="mals-sub">
+                <h6>AMD Processors:</h6>
+                <select id="OptionProcessorAMD" name="product[]">
+                    <option value="a-123:40">AMD a-123 (+$40.00)</option>
+                    <option value="a-234:70">AMD a-234 (+$70.00)</option>
+                </select>
+            </div>
+
+            <h3>Hard Drive:</h3>
+            <div id="HardDrive">
+                <select id="OptionHardDrive" name="product[]" required>
+                    <option value="">Select Hard Drive Type</option>
+                    <option value="SSD" mals-generate="#HardDriveSSD">SSD</option>
+                    <option value="Hard Drive - Traditional" mals-generate="#HardDriveTraditional">Traditional</option>
+                </select>
+            </div>
+
+            <div id="HardDriveSSD" class="mals-sub">
+                <h6>Solid State Drives (SSD):</h6>
+                <select id="OptionHardDriveSSD" name="product[]">
+                    <option value="120Gb:50">120Gb (+$50.00)</option>
+                    <option value="250Gb:100">250Gb (+$100.00)</option>
+                </select>
+            </div>
+
+            <div id="HardDriveTraditional" class="mals-sub">
+                <h6>Traditional Hard Drive:</h6>
+                <select id="OptionHardDriveTraditional" name="product[]">
+                    <option value="500Gb:30">500Gb (+$30.00)</option>
+                    <option value="1Tb:50">1Tb (+$50.00)</option>
+                </select>
+            </div>
+
+            Qty: 
+            <select name="qty">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+            <div>Total: $<span id="malsRunningTotal">0.00</span></div>
+        </form>
+    </body>
+</html>

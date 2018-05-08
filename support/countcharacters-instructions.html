@@ -1,0 +1,53 @@
+Instructions for Count Characters:
+
+1) Copy the code example into a new web page e.g. mals.html
+2) Download and save the mals-scripts.js file into the same folder (note: can be in another)
+3) Change the product information in the form to your product
+    e.g. <input type="hidden" name="product[]" value="Custom Item" />
+4) Change the price value to your price
+    e.g. <input type="hidden" name="price" value="20" />
+5) For the input field you wish show characters remaining add maxlength="x"
+    e.g. <input type="text" name="product[]" maxlength="20" />
+
+    The script will automatically pick up the maxlength value and display remaining characters
+
+    TIP!
+    - Use a placeholder to make it obvious what to do
+    e.g. <input type="text" name="product[]" maxlength="20" placeholder="Line 1: Add your necklace text here" />
+
+5) Ensure your wwX and userid are the same as Mals (TIP! enter your details at the top before copying example)
+6) Open the web page in a browser e.g. Chrome and test it
+
+--- Calling Script ---
+The script is very versatile. You can activate it on one or more forms (or links) easily. Note: if you don't know jQuery selectors visit https://www.w3schools.com/jquery/jquery_selectors.asp
+
+- Example 1 = specific form by id
+MalsScripts.countCharacters('#form1');
+
+This will activate the script on the form with id="form1"
+    
+- Example 2 = specific forms by id
+MalsScripts.countCharacters('#form1,#form2');
+
+This will activate the script on two forms with id="form1" and id="form2"
+    
+- Example 3 = all forms by class
+MalsScripts.countCharacters('.myform');
+
+This will activate the script on all forms with class="myform"
+    
+- Example 4 = callback function
+MalsScripts.countCharacters('#form1',function(element,charactersRemaining,event){
+    // Called when input field is updated
+    // can be used to create your own alert
+    // Returns
+    // - element = element object being changed
+    // - charactersRemaining = number of characters remaining for selected element
+    // - event = event object
+});
+
+--- General Notes ---
+- Add class .mals-ignore to any forms you don't want transformed e.g. <form action="http://wwX.aitsafe.com/cf/add.cfm" class="mals-ignore">...
+- You can select multiple forms by using a comma e.g. MalsScripts.countCharacters('#form1,#form2');
+- jQuery selectors work here
+- callback functions = create a function e.g. callbackcountCharacters which will be called when the form is transformed

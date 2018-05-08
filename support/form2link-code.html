@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="utf-8"> 
+        <title>Example</title>
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Mals Scripts -->
+        <script src="mals-scripts.js"></script>
+        <script>
+            $(document).ready(function(){
+                MalsScripts.form2link('#form1');
+            });
+        </script>
+    </head>
+    <body>
+        <form action="http://ww9.aitsafe.com/cf/add.cfm" method="post" id="form1">
+            <input name="userid" type="hidden" value="B4195535" />
+            <input name="product" type="hidden" value="Jacket" />
+            <input name="price" type="hidden" value="99.00" />
+            <button type="submit">Buy</button>
+        </form>
+    </body>
+</html>

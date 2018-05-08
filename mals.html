@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="utf-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>LH Software - Mals-e.com Scripts</title>        
+        <!-- jQuery -->
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <!-- Bootstrap -->
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+        <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+        <link rel="stylesheet" href="res/bootstrap.min.css">
+        <script src="js/bootstrap-3.3.7.min.js"></script>
+        <!-- Mals Scripts -->
+        <script src="js/mals-scripts.js"></script>
+        <!-- Site -->
+        <script src="js/site.js"></script>
+        <link rel="stylesheet" href="res/site.css">
+        <style type="text/css">
+            input{
+                display: block;
+            }
+            
+            .mals-link{
+                color: chocolate;
+                font-size: larger;
+            }
+            
+            .mals-running-total{
+                font-size:larger;
+                font-weight: bold;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+            
+            .example{
+                border: 1px solid #CCC;
+                padding: 15px;
+                margin: 15px;
+            }
+            
+            .example-activate{
+                margin-bottom: 30px;
+                margin-top: 10px;
+            }
+            
+            .show-code{
+                margin-top: 25px;
+                border-top: 1px solid #CCC;
+            }
+            
+            .code-show, .code-hide, .read-instructions{
+                cursor: pointer;
+                color: blue;
+            }
+            
+            .code{
+                display: none;
+            }
+            
+            .show-code-more-button{
+                margin-top: 10px;
+            }
+            
+            .show-code-more{
+                display: none;
+            }
+            
+            pre{
+                margin-top: 5px;
+            }
+            
+            #viewCartDiv.affix {
+                bottom: 10px;
+                right: 75px;
+            }
+        </style>
+        
+        <script> 
+            const exampleMalsUsername = 'B4195535';
+            const exampleMalsServer = 'ww9';
+            var malsUsername = exampleMalsUsername;
+            var malsServer = exampleMalsServer;
+
+            // Example callback functions
+            function callbackForm2Link(e){
+                // Call back after form2link()
+                alert('Taking you to cart now...')
+                // e.g. to stop use
+                // e.preventDefault();
+            }
+
+            function callbackSilentCart(e){
+                // Call back after silentCart()
+                $(e.target).after(`<div class="alert alert-success alert-dismissible" id="myAlert">
+                    <a href="#" class="close">&times;</a>
+                    <strong>Success!</strong> Item added to cart.
+                  </div>
+                </div>`);
+            }
+
+            function callbackRestrictQtyError(err,obj,e,option){
+                // Example call back if error occurs for restrictQty()
+                // err = name of error e.g. MinMax
+                // obj = jquery object of element where error is
+                // e = event called
+                // option = item>str,min>int,max>int,productpr>obj(name: product: price: selected) NB: may be undefined
+
+                console.log(option.min, option.max, option.productpr.name)            
+                if (err === 'MinMax') alert(`You need to add the right quantity, at least x${option.min} for ${option.productpr.name}`);
+
+            }
+
+            function updateExamples(){
+                // Update example codes to new mals settings
+                let prevMalsUsername = malsUsername;
+                let prevMalsServer = malsServer;
+                malsUsername = $('#malsUsername').val();
+                malsServer = $('#malsServer').val();
+
+                // Change all example code in document inc. forms, links and ajax code content
+                $(prevMalsUsername).replaceAll(malsUsername);
+                $("code").html( $("code").html().replace(prevMalsUsername, malsUsername));
+                $("code").html( $("code").html().replace(prevMalsServer, malsServer));
+
+                $('.example form').attr('action',$('.example form').attr('action').replace(prevMalsServer, malsServer));
+                $('.example form input[name="userid"]').val(malsUsername);
+
+                $('.example a').attr('href',$('.example a').attr('href').replace(prevMalsUsername, malsUsername));
+                $('.example a').attr('href',$('.example a').attr('href').replace(prevMalsServer, malsServer));
+
+                $('#viewcart').attr('action',$('#viewcart').attr('action').replace(prevMalsServer, malsServer));
+                $('#viewcart input[name="userid"]').val(malsUsername);
+            }
+            
+            function getExampleUrl(id,type){
+                let url = 'support/';
+                url += id + '-' + type;
+                url += '.html';
+                return url;
+            }
+            
+            function needHelp(element){
+                // Get correct script and send to support page
+                let id = $(element).parents('.example').attr('id');
+                let params = '';
+                if (id !== undefined) params = `?scriptID=${id}`;
+                document.location.href = `support.html${params}`;
+            }
+
+            $(document).ready(function(){
+                // Page setup
+                $('#malsUsername').val(malsUsername);
+                $('#malsServer').val(malsServer);
+
+                let scripts = new MalsScripts().scripts;
+                
+                // Sort scripts
+                scripts = objectSort(scripts,'name',true);
+                
+                $('#examples').html('<div class="container-fluid"><h2>scripts &amp; examples</h2></div>');
+                
+                // Create example shells from template and add to page
+                scripts.forEach(function(item,index){
+                    let exampleShell = `<div id="${item.id}" class="example">
+                        <div class="container-fluid">
+                            <h3>${item.name} &gt; ${item.title}</h3>
+                            <div class="example-description">${item.description}</div>
+                            <div class="example-demo"></div>
+                            <div class="show-code"></div>
+                        </div>
+                    </div>`;                
+                    $('#examples').append(exampleShell);
+
+                    // Ajax demo
+                    let url = getExampleUrl(item.id,'demo');
+                    getContent(`#${item.id} .example-demo`,url,'html',function(){
+                        // Bootstrap
+                        $('.example form input[type="text"],.example form select').addClass('form-control').css('margin-bottom','7px');
+                        
+                        // Form select qty
+                        let qty = 10;
+                        for (let i = 1; i<=qty;i++){
+                            $(`#${item.id} select[name^="qty"]`).append($('<option>', {value:i, text:i}));
+                        }
+                        
+                        // Activated
+                        $('.example-activate > button').click(function(e){
+                            $(this).css('color','blue');
+                        })
+                    });
+                })
+                
+                // Create list of categories
+                let categoryNav = '<div class="panel panel-default">';
+                let categories = MalsScripts.removeDuplicates(scripts,'category');
+                
+                // Sort by category name
+                categories = objectSort(categories,'category');
+
+                categories.forEach(function(item,index){
+                    // Filter scripts to current category
+                    let results = scripts.filter(script => script.category === item.category);
+                    results.sort(function(a,b){return a.name - b.name;})
+
+                    categoryNav += `<div class="panel-heading"><h4 class="panel-title">
+                    <span class="badge">${results.length}</span> 
+                    <a data-toggle="collapse" href="#${item.category.replace(' ','')}">${item.category}</a>
+                    </h4></div>`;
+                    
+                    categoryNav += `<div id="${item.category.replace(' ','')}" class="panel-collapse collapse"><ul class="list-group">`;
+
+                    results.forEach(function(result,i){
+                        categoryNav += `<li class="list-group-item"><a href="#${result.id}">${result.name}</a> &gt; ${result.title}</li>`;
+                    })
+                    
+                    categoryNav += `</ul></div>`;
+                })
+                categoryNav += '</div></div>';
+                
+                $('#scriptcategories').html('<div class="container-fluid"><h4>Script Categories</h4>' + categoryNav + '</div>');
+
+                // Code snippets
+                $('.show-code').html('<h5></h5><div class="code"><pre><code></code></pre></div>');
+                $('.show-code h5').html(`<button onclick="needHelp(this);" class="btn btn-success">Need help?</button> 
+                <span class="code-show">Show Example Code</span> :: <span class="read-instructions">Instructions</span> `);
+
+                $('.code-show, .read-instructions').click(function(){
+                    // Show code & instructions
+                    let isInstruction = ($(this).text().toLowerCase().search('instruction') > -1) ? true:false;
+                    let example = $(this).closest('.example').attr('id');
+                    example = example.toLowerCase();
+
+                    let urlType = (isInstruction) ? 'instructions' : 'code';
+                    let url = getExampleUrl(example,urlType);
+
+                    // Show via ajax
+                    getContent('code',url);
+
+                    // Show/Hide link
+                    (!isInstruction) ? $(this).parents('.show-code').find('.copy-code').show() : $(this).parents('.show-code').find('.copy-code').hide();
+                    $(this).parents('.show-code').find('.code').slideDown();
+                    $(this).parents('.show-code').find('.code-hide').remove();
+                    $(this).parents('.show-code h5').append(' <span class="code-hide">(^ hide)</span>');
+
+                    // Click functionality
+                    $('.code-hide').click(function(){
+                        $(this).parents('.show-code').find('.code').slideUp();
+                        $(this).remove();
+                    });
+                });
+
+                $('.show-code .code').prepend('<button class="copy-code">Copy Code</button>');
+
+                $('.copy-code').click(function(e){
+                    copyToClipboard($(this).parent().find('code'));
+                    $(this).css('color','blue').text('Code Copied');
+                })
+                
+                // Show MalsScripts Version
+                let malsScripts = new MalsScripts();
+                let scriptVersion = $('#MalsScriptsVersion').html();
+                scriptVersion = scriptVersion.replace(/{version}/,malsScripts.version.toFixed(2).toString());
+                scriptVersion = scriptVersion.replace(/{urlGithubMalsScripts}/g,urlGithubMalsScripts);
+                scriptVersion = scriptVersion.replace(/{urlJQuery}/g,urlJQuery);
+                scriptVersion = scriptVersion.replace(/{urlBootstrap}/g,urlBootstrap);
+                scriptVersion = scriptVersion.replace(/{urlBootstrapCSS}/g,urlBootstrapCSS);
+                $('#MalsScriptsVersion').html(scriptVersion);
+                
+                // Go to location hash if applicable
+                //$('html, body').animate({ scrollTop: $(location.hash).offset().top }, 'slow');
+            });
+        </script>
+    </head>
+    <body>
+        <header></header>
+        <div class="container-fluid">
+            <div class="page-header">
+                <h1>free scripts for Mals-e.com</h1>
+            </div>
+            <p>To assist those who use Mals Ecommerce shopping cart (<a href="http://www.mals-e.com">www.mals-e.com</a>) LH Software has developed a range of useful code snippets/scripts to enhance your customer experience. 
+            From adding a silent call to the cart so they don't have to leave your site to generating dynamic options and images, these scripts are available under GNU license to use as you see fit. 
+            You don't have to reference LH Software anywhere and can change the code as you see fit. For support in setting in the scripts up or for custom work please <a href="support.html">visit our support page</a>.</p>
+            <p><strong>instructions:</strong> for each example below click on the buy button/link to see normal behaviour to add to cart. 
+                Click the 'Activate' button then click 'Buy' to see the script in action.</p>
+            <div class="container-fluid">
+                <div class="col-sm-6">
+                    <div id="scriptcategories"></div>
+                </div>
+                <div class="col-sm-6">
+                    <div id="MalsScriptsVersion" class="well form-inline">
+                        <h4>MalsScripts.js <a href="#" onclick="$('#downloadScripts').slideDown();$(this).hide();">(show files)</a></h4>
+                        <div style="margin-bottom: 8px; "><span style="padding: 4px; font-style: italic; border: 1px dashed black;">Current Version: {version}</span></div>
+                        <div id="downloadScripts" style="display: none;">
+                            <div><span style="font-weight: bold">Instructions:</span> link to or download files below (right-click and choose 'Save link/target as...'). 
+                                If downloading save files into same folder as your html page(s).</div>
+                            <ul style="margin-top: 10px;">
+                                <li><span style="font-weight: bold">Mals Script</span> - {urlGithubMalsScripts} <a href="{urlGithubMalsScripts}">(download)</a></li>
+                                <li><span style="font-weight: bold">jQuery</span> - {urlJQuery} <a href="{urlJQuery}">(download)</a></li>
+                                Optional:
+                                <li><span style="font-weight: bold">Bootstrap</span> - {urlBootstrap} <a href="{urlBootstrap}">(download)</a></li>
+                                <li><span style="font-weight: bold">Bootstrap CSS</span> - {urlBootstrapCSS} <a href="{urlBootstrapCSS}">(download)</a></li>
+                            </ul>
+                        </div>
+                        <button onclick="needHelp(this);" class="btn btn-success">Need help?</button> <a href="support.html">Visit support page here</a> &gt;&gt;
+                    </div>
+                </div>
+            </div>
+            <div class="well form-inline" style="margin-top: 10px;">
+                <h4>enter your mals-e.com details</h4>
+                <div class="form-inline">
+                    <label for="malsUsername">username:</label>
+                    <input type="text" class="form-control mb-2 mr-sm-2" id="malsUsername" placeholder="Mals Username" />
+                    <label for="malsServer">server:</label>
+                    <input type="text" class="form-control mb-2 mr-sm-2" id="malsServer" placeholder="Mals Server" maxlength="4" /> 
+                    <button class="btn btn-info" onclick="updateExamples();">update examples</button>
+                </div>
+            </div>
+        </div>
+        <div id="examples"></div>
+        <div id="viewCartDiv" data-spy="affix" data-offset-top="205">
+            <form id="viewcart" method="POST" action="http://ww9.aitsafe.com/cf/review.cfm">
+                <input type="hidden" name="userid" value="B4195535" />
+                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span> View Example Cart</button>
+            </form>
+        </div>
+        <footer></footer>
+    </body>
+</html>

@@ -1,0 +1,32 @@
+<p style="margin-top: 10px; font-weight: bold;">Option 1 = default cart spacing, Option 2 = custom cart spacing</p>
+<div class="example-activate">
+    <button onclick="$('#priceOptionsTotalDisplay').show();MalsScripts.priceOptions('#formPriceOptions');">Activate (Option 1)</button>
+    <button onclick="$('#priceOptionsTotalDisplay').show();MalsScripts.priceOptions('#formPriceOptions',',');">Activate (Option 2)</button>
+</div>
+<form id="formPriceOptions" method="POST" action="http://ww9.aitsafe.com/cf/add.cfm">
+    <h4>Bespoke Laptop</h4>
+    <input type="hidden" name="userid" VALUE="B4195535" />
+    <input type="hidden" name="product[]" value="Bespoke Laptop XI" />
+    <input type="hidden" name="price" value="140.00" />
+    <h5>Base Price: $140.00</h5>
+    Processor:
+    <select name="product[]">
+        <option value="Intel Pentium:0">Intel Pentium (+$0.00)</option>
+        <option value="Intel Core i3:40">Intel Core i3 (+$40.00)</option>
+        <option value="Intel Core i5:70">Intel Core i5 (+$70.00)</option>
+        <option value="Intel Core i7:100">Intel Core i7 (+$100.00)</option>
+    </select>
+    Hard Drive:
+    <select name="product[]">
+        <option value="SSD 128Gb:0">SSD 128Gb (+$0.00)</option>
+        <option value="SSD 250Gb:40.95">SSD 250Gb (+$40.95)</option>
+        <option value="SSD 350Gb:181.33">SSD 350Gb (+$181.33)</option>
+    </select>
+    Laptop Case (+$9.99) <input name="product[]" type="checkbox" value="Laptop Case:9.99" />
+    Color:
+    <div>Red <input name="product[]"  type="radio" value="Red Case:0.00"></div>
+    <div>Green (+$5.00) <input name="product[]"  type="radio" value="Green Case:7.00"></div>
+    Qty: <select name="qty"></select>
+    <div id="priceOptionsTotalDisplay" style="display: none;" class="mals-running-total">Total: $<span id="malsRunningTotal">0.00</span></div>
+    <div><button type="submit" class="btn btn-primary">Add To Cart</button></div>
+</form>

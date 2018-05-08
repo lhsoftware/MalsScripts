@@ -1,0 +1,41 @@
+Instructions for Form2Link:
+
+1) Copy the code example into a new web page e.g. mals.html
+2) Download and save the mals-scripts.js file into the same folder (note: can be in another)
+3) Ensure your wwX and userid are the same as Mals (TIP! enter your details at the top before copying example)
+4) Open the web page in a browser e.g. Chrome and test it
+
+--- Form link examples
+
+// Transform all mals-e.com/aitsafe.com forms on page
+MalsScripts.form2link();
+
+// Tranform specific form by id e.g. id="form1"
+MalsScripts.form2link('#form1');
+
+// Tranform specific forms by id
+MalsScripts.form2link('#form1,#form2');
+
+// Transform specific form by class e.g. class="myforms"
+MalsScripts.form2link('.myforms');
+
+// Callback function when on each transform. Use to create your own code logic
+MalsScripts.form2link('#form1',function(){
+    // Called when link is created (per form)
+    alert('this is called);
+});
+
+// Callback function when transform link is clicked. Note: will automatically take you to cart
+MalsScripts.form2link('#form1',,function(){
+    // Called when link is clicked
+    alert('this is called);
+});
+
+/*
+Notes:
+- Add class .mals-ignore to any forms you don't want transformed e.g. <form class="mals-ignore"..>
+- jQuery selectors work here
+- does not work with <select> (due to multi choice option)
+- does not take into account HTML5 form attribs. like formaction, formmethod etc.
+- if qty not added (esp. multiform) default to 1 
+*/

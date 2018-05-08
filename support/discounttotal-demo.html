@@ -1,0 +1,13 @@
+<div class="example-activate"><button onclick="$('#discountTotalDisplay').show();MalsScripts.discountTotal('#formDiscountTotal');">Activate</button></div>
+<form id="formDiscountTotal" method="POST" action="http://ww9.aitsafe.com/cf/add.cfm">
+    <h4>Discount Books</h4>
+    <p>Choose a quantity and save!</p>
+    <p>x1-2 = $9.99, x3-4 = $8.99, x5-8 = $7.99, x9+ = $6.99</p>
+    <input type="hidden" name="userid" value="B4195535" />
+    <input type="hidden" name="discountpr" value="2,9.99:2,8.99:4,7.99:0,6.99" />
+    Quantity: <select name="qty"></select> 
+    <input type="hidden" name="product" value="Discount Books" />
+
+    <div id="discountTotalDisplay" style="display: none;" class="mals-running-total">Total: $<span id="malsDiscountTotal">0.00</span></div>
+    <div><button type="submit" class="btn btn-primary">Buy Book(s)</button></div>
+</form>

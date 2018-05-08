@@ -1,0 +1,20 @@
+body{
+    padding-top: 51px;
+}
+
+header{
+}
+
+#top.affix {
+    bottom: 10px;
+    right: 12px;
+}
+
+#top a{
+    color: white;
+    text-decoration: none;
+}
+
+footer{
+    padding: 10px;
+}

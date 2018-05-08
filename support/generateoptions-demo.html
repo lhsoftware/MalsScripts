@@ -1,0 +1,104 @@
+<style type="text/css">
+    #formGenerateOptions .mals-product-group{
+        background-color:#CCC;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 25px;
+    }
+    
+    #formGenerateOptions .mals-product-group h5{
+        font-weight: bold;
+    }
+    
+    #formGenerateOptions .mals-hide{
+        display: none;
+    }
+</style>
+<div class="example-activate">
+    <button onclick="$('#formGenerateOptions')[0].reset();MalsScripts.generateOptions('#formGenerateOptions');">Activate</button>
+    <button onclick="$('#formGenerateOptions')[0].reset();MalsScripts.generateOptions('#formGenerateOptions',true);$('#generateOptionsTotalDisplay').show();">Activate with Price Options</button>
+</div>
+<form id="formGenerateOptions" method="POST" action="http://ww9.aitsafe.com/cf/add.cfm">
+    <h4>Bespoke PC - Brand X</h4>
+    <input type="hidden" name="userid" VALUE="B4195535" />
+    <input type="hidden" name="product[]" value="Bespoke PC Brand X" />
+    <input type="hidden" name="price" value="140.00" />
+    <h5>Base Price: $140.00</h5>
+    <div class="mals-product-group">
+        <h5>Processor:</h5>
+        <div id="Processor">
+            <select id="OptionProcessor" name="product[]" required>
+                <option value="">Select Processor Type</option>
+                <option value="Processor - Intel" mals-generate="#ProcessorIntel">Intel</option>
+                <option value="Processor - AMD" mals-generate="#ProcessorAMD">AMD</option>
+            </select>
+        </div>
+        
+        <div id="ProcessorIntel" class="mals-sub">
+            <h6>Intel Processors:</h6>
+            <select id="OptionProcessorIntel" name="product[]">
+                <option value="Pentium:10">Pentium (+$10.00)</option>
+                <option value="Duo:20">Duo (+$20.00)</option>
+                <option value="Core" mals-generate="#ProcessorIntelCore">Core (i3,i5,i7)</option>
+            </select>
+        </div>
+
+        <div id="ProcessorIntelCore" class="mals-sub">
+            <h6>Intel Core Processors:</h6>
+            <select id="OptionProcessorIntelCore" name="product[]">
+                <option value="i3:40">Intel Core i3 (+$40.00)</option>
+                <option value="i5:70">Intel Core i5 (+$70.00)</option>
+                <option value="i7:100">Intel Core i7 (+$100.00)</option>
+                <option value="i9" mals-generate="#ProcessorIntelCorei9">i9 Options</option>
+            </select>
+        </div>
+        
+        <div id="ProcessorIntelCorei9" class="mals-sub">
+            <h6>Intel Core i9 Processors:</h6>
+            <select id="OptionProcessorIntelCorei9" name="product[]">
+                <option value="Super:200">Super (+$200.00)</option>
+                <option value="Awesome:400">Awesome (+$400.00)</option>
+            </select>
+        </div>
+        
+        <div id="ProcessorAMD" class="mals-sub">
+            <h6>AMD Processors:</h6>
+            <select id="OptionProcessorAMD" name="product[]">
+                <option value="AMD 123:0">AMD 123 (+$0.00)</option>
+                <option value="AMD 234:40">AMD 234 (+$40.00)</option>
+                <option value="AMD 345:70">AMD 345 (+$70.00)</option>
+                <option value="AMD 456:100">AMD 456 (+$100.00)</option>
+            </select>
+        </div>
+    </div>
+    <div class="mals-product-group">
+        <h5>Hard Drive:</h5>
+        <div id="HardDrive">
+            <select id="OptionHardDrive" name="product[]" required>
+                <option value="">Select Hard Drive Type</option>
+                <option value="SSD" mals-generate="#HardDriveSSD">SSD</option>
+                <option value="Hard Drive - Traditional" mals-generate="#HardDriveTraditional">Traditional</option>
+            </select>
+        </div>
+        
+        <div id="HardDriveSSD" class="mals-sub">
+            <h6>Solid State Drives (SSD):</h6>
+            <select id="OptionHardDriveSSD" name="product[]">
+                <option value="120Gb:50">120Gb (+$50.00)</option>
+                <option value="250Gb:100">250Gb (+$100.00)</option>
+            </select>
+        </div>
+        
+        <div id="HardDriveTraditional" class="mals-sub">
+            <h6>Traditional Hard Drive:</h6>
+            <select id="OptionHardDriveTraditional" name="product[]">
+                <option value="500Gb:30">500Gb (+$30.00)</option>
+                <option value="1Tb:50">1Tb (+$50.00)</option>
+            </select>
+        </div>
+    </div>
+    
+    Qty: <select name="qty"></select>
+    <div id="generateOptionsTotalDisplay" style="display: none;" class="mals-running-total">Total: $<span id="malsRunningTotal">0.00</span></div>
+    <div><button type="submit" class="btn btn-primary">Add To Cart</button></div>
+</form>

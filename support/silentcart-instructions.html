@@ -1,0 +1,53 @@
+Instructions for Silent Cart:
+
+1) Copy the code example into a new web page e.g. mals.html
+2) Download and save the mals-scripts.js file into the same folder (note: can be in another)
+3) Change the product information in the form to your product
+    e.g. <input type="hidden" name="product[]" value="Curtains" />
+4) Ensure your wwX and userid are the same as Mals (TIP! enter your details at the top before copying example)
+5) Open the web page in a browser e.g. Chrome and test it
+
+--- Customize ---
+By default the script uses Bootstrap (https://getbootstrap.com/) to create the modal box to inform your customer that their product has been added.
+The modal box can be easily changed. At the bottom of the example is a line of code which reads:
+
+    <a href="http://wwX.aitsafe.com/cf/review.cfm?userid=YYYYYYY">View your cart here</a> or <a data-dismiss="modal" href="#">Continue shopping</a>
+
+This lets the customer check their cart contents or close the modal box. Edit this line to whatever you wish. Style it too by using CSS styles or don't use it all (see below).
+
+--- Calling Script ---
+The script is very versatile. You can activate it on one or more forms (or links) easily. Note: if you don't know jQuery selectors visit https://www.w3schools.com/jquery/jquery_selectors.asp
+
+- Example 1 = specific form by id
+MalsScripts.silentCart('#form1');
+
+This will activate the script on the form with id="form1"
+    
+- Example 2 = specific forms by id
+MalsScripts.silentCart('#form1,#form2');
+
+This will activate the script on two forms with id="form1" and id="form2"
+    
+- Example 3 = all forms by class
+MalsScripts.silentCart('.myform');
+
+This will activate the script on all forms with class="myform"
+    
+- Example 4 = all forms and links
+MalsScripts.silentCart();
+    
+Activates all mals-e.com/aitsafe.com forms on page
+    
+- Example 5 = callback function
+MalsScripts.silentCart('#form1',function(){
+    // Called when added to cart
+    alert('this is called);
+});
+
+When form1 adds to cart your callback function fires and overrides default modal box. Used to e.g. show an alert or play a song!
+    
+--- General Notes ---
+- Add class .mals-ignore to any forms you don't want transformed e.g. <form action="http://wwX.aitsafe.com/cf/add.cfm" class="mals-ignore">...
+- You can select multiple forms by using a comma e.g. MalsScripts.silentCart('#form1,#form2');
+- jQuery selectors work here
+- callback functions = create a function e.g. callbackSilentCart which will be called when the form is transformed

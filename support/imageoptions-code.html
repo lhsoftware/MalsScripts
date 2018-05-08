@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="utf-8"> 
+        <title>Example</title>
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Mals Scripts -->
+        <script src="mals-scripts.js"></script>
+        <script>
+            $(document).ready(function(){
+                MalsScripts.imageOptions('#form1');
+                MalsScripts.priceOptions('#form1');
+            });
+        </script>
+        <style type="text/css">
+            #malsImages div{
+                position: relative;
+                display: inline-block;
+            }
+            
+            .mals-image-display{
+                position: relative;
+            }
+
+            .mals-image{
+                width: 100%;
+                height: auto;
+            }
+
+            .mals-image-overlay{
+                position: absolute;
+                z-index: 100;
+                height: 40%;
+            }
+        </style>
+    </head>
+    <body>
+        <form method="POST" action="http://ww9.aitsafe.com/cf/add.cfm" id="form1">
+            <div id="malsImages">
+                <div id="malsImageDisplay"><img src="/support/tshirt-front-white.png" class="mals-image" /></div>
+                <div id="malsImageDisplay2"><img src="/support/tshirt-back-white.png" class="mals-image" /></div>
+            </div>
+            <input name="product[]" type="hidden" value="Custom T-Shirt" />
+            <input name="price" type="hidden" value="10.99" />
+            <h1>Custom T-Shirt</h1>
+            <h2>Base Price: $10.99</h2>
+            
+            <h3>Color:</h3>
+            <select name="product[]">
+                <option value="White" mals-img="{'src':'/support/tshirt-front-white.png,/support/tshirt-back-white.png','target':'#malsImageDisplay,#malsImageDisplay2'}">White</option>
+                <option value="Red" mals-img="{'src':'/support/tshirt-front-red.png,/support/tshirt-back-red.png','target':'#malsImageDisplay,#malsImageDisplay2'}">Red</option>
+            </select>
+
+            <h3>Front Logo:</h3>
+            <select name="product[]">
+                <option value="Front Logo - None" mals-img="{'src':'/support/empty.png','target':'#malsImageDisplay','overlay':'true'}">No Logo</option>
+                <option value="Front Logo - Zombie:5.00" mals-img="{'src':'/support/tshirt-logo-zombie.png','scale':'40%','left':'39%','top':'15%','overlay':'true'}">Zombie (+$5)</option>
+                <option value="Front Logo - Dog:7.00" mals-img="{'src':'/support/tshirt-logo-dog.png','left':'35%','top':'20%','scale':'30%','overlay':'true'}">Dog (+$7)</option>
+            </select>
+            
+            <h3>Reverse Logo:</h3>
+            <select name="product[]">
+                <option value="Reverse Logo - None" mals-img="{'src':'/support/empty.png','target':'#malsImageDisplay2','overlay':'true'}">No Logo</option>
+                <option value="Reverse Logo - Zombie:5.00" mals-img="{'src':'/support/tshirt-logo-zombie.png','target':'#malsImageDisplay2','scale':'40%','left':'39%','top':'15%','overlay':'true'}">Zombie (+$5)</option>
+                <option value="Reverse Logo - Dog:7.00" mals-img="{'src':'/support/tshirt-logo-dog.png','target':'#malsImageDisplay2','scale':'30%','left':'34%','top':'20%','overlay':'true'}">Dog (+$7)</option>
+            </select>
+
+            <h3>Qty:</h3>
+            <select name="qty">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <div>Total: $<span id="malsRunningTotal">0.00</span></div>
+        </form>
+    </body>
+</html>

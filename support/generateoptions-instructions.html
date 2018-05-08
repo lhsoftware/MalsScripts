@@ -1,0 +1,92 @@
+Instructions for Generate Options:
+
+1) Copy the code example into a new web page e.g. mals.html
+2) Download and save the mals-scripts.js file into the same folder (note: can be in another)
+3) Change the base product information in the form to your product
+    e.g. <input type="hidden" name="product[]" value="Curtains" />
+4) Change the base price
+    e.g. <input type="hidden" name="price" value="20.00" />
+5) Build you product options
+
+    Each product option should be a similar template like the one below:
+
+    <div id="PRODUCT">
+        <select id="OptionPRODUCT" name="product[]" required>
+            <option value="">Select PRODUCT</option>
+            <option value="No next product:8.00">No next product ($8)</option>
+            <option value="PRODUCT - NEXTPRODUCT1" mals-generate="#NEXTPRODUCT1">NEXT PRODUCT 1</option>
+            <option value="PRODUCT - NEXTPRODUCT2" mals-generate="#NEXTPRODUCT2">NEXT PRODUCT 2</option>
+        </select>
+    </div>
+
+    <div id="NEXTPRODUCT1" class="mals-sub">
+        <select id="OptionNEXTPRODUCT1" name="product[]">
+            <option value="OPTION 1:10">OPTION 1 (+$10)</option>
+            <option value="OPTION 2:20">OPTION 1 (+$20)</option>
+        </select>
+    </div>
+
+    <div id="NEXTPRODUCT2" class="mals-sub">
+        <select id="OptionNEXTPRODUCT2" name="product[]">
+            <option value="OPTION 1:10">OPTION 1 (+$5)</option>
+            <option value="OPTION 2:20">OPTION 1 (+$7)</option>
+        </select>
+    </div>
+
+    PRODUCT = main product name e.g. Processor
+    NEXTPRODUCTx = next option product name e.g. Intel
+
+    - Ensure there's a <div> tag surrounding the <select> options and give it an id of the product e.g. Processor
+    - Ensure the <select> has an id beginning with Option and is the same as the <div> id e.g. OptionProcessor
+    - Ensure mals-sub class is added to the sub options within the <div>
+    - Option Values = three possible values here
+        
+    i) empty > won't show in the cart or do anything. Used to set up options e.g. Select a product
+    ii) product:price > will show in the cart and adds to the total display
+    iii) product > will show in the cart. Used to set up next product option
+    - You can have as many as you want
+    
+6) Generate Options
+    
+    To generate/show a related product option list add mals-generate="#xxx" to <option> as an attribute
+
+    #xxx = id of next <div> option group e.g. #ProductIntel
+    
+7) Ensure your wwX and userid are the same as Mals (TIP! enter your details at the top before copying example)
+8) Open the web page in a browser e.g. Chrome and test it
+
+--- Customize ---
+The script looks for an element with id called malsRunningTotal to display the total (if selected). Put this wherever you like within the form and style using CSS.
+
+<div>Total: $<span id="malsRunningTotal">0.00</span></div>
+
+--- Calling Script ---
+The script is very versatile. You can activate it on one or more forms (or links) easily. Note: if you don't know jQuery selectors visit https://www.w3schools.com/jquery/jquery_selectors.asp
+
+- Example 1 = specific form by id
+MalsScripts.generateOptions('#form1');
+
+This will activate the script on the form with id="form1"
+    
+- Example 2 = specific forms by id including price options **** RECOMMENDED ****
+MalsScripts.generateOptions('#form1',true);
+
+This will activate the script on the form with id="form1" and display running price
+    
+- Example 3 = callback function
+MalsScripts.generateOptions('#form1',true,function(){
+    // Called when script is called;
+    
+});
+
+- Example 4 = callback click function
+generateOptions('#form1',true,,function(){
+    // Called when option changed
+    
+})
+
+--- General Notes ---
+- Add class .mals-ignore to any forms you don't want transformed e.g. <form action="http://wwX.aitsafe.com/cf/add.cfm" class="mals-ignore">...
+- You can select multiple forms by using a comma e.g. MalsScripts.generateOptions('#form1,#form2');
+- jQuery selectors work here
+- callback functions = create a function e.g. callbackgenerateOptions which will be called when the form is transformed
