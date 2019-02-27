@@ -2,7 +2,7 @@
 
 class MalsScripts{
     constructor(){
-        this.version = 1.0;
+        this.version = 1.1;
         this.aitsafeAdd = 'aitsafe.com/cf/add';    // aitsafe/mals-e address
         this.aitsafeAddSingle = 'aitsafe.com/cf/add.cfm';
         this.aitsafeAddMulti = 'aitsafe.com/cf/addmulti.cfm';
@@ -376,7 +376,7 @@ class MalsScripts{
         $('#malsRunningTotal',form).text(totalText);
         
         // Callback if applicable
-        if (callback !== undefined && callback !== null) callback(e);
+        if (callback !== undefined && callback !== null) callback();
     }
 
     static runningTotalCalc(form,cartDelimiter){
@@ -594,7 +594,7 @@ class MalsScripts{
             images:[]
         }
         
-        $('input[name^="product"], select[name^="product"]',form).each(function(){
+        $('input[name^="product"], select[name^="product"]',form).each(function(e){
             // Stack images
             
             // Get image url in JSON format from attribute mals-img
@@ -720,7 +720,7 @@ class MalsScripts{
         $('#malsDiscountTotal',form).text(totalText);
         
         // Callback if applicable
-        if (callback !== undefined && callback !== null) callback(e);
+        if (callback !== undefined && callback !== null) callback();
     }
 
     static discountTotalCalc(form){
@@ -921,7 +921,7 @@ class MalsScripts{
         if (priceOptionsScript) MalsScripts.priceOptions(form);
         
         // Callback if applicable
-        if (callback !== undefined && callback !== null) callback(e);
+        if (callback !== undefined && callback !== null) callback();
     }
     
 // --------------------------------------------
